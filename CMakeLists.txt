@@ -9,6 +9,7 @@ add_library(color_printer SHARED
     src/color_printer.cpp
 )
 
+# 安装库
 install(TARGETS color_printer
     EXPORT ${PROJECT_NAME}
     ARCHIVE DESTINATION lib
@@ -16,7 +17,39 @@ install(TARGETS color_printer
     RUNTIME DESTINATION bin
 )
 
+# 安装头文件
 install(DIRECTORY include/
     DESTINATION include
     FILES_MATCHING PATTERN "*.h"
+)
+
+# 生成包配置文件
+include(CMakePackageConfigHelpers)
+
+# 写入包版本文件
+write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+    VERSION 1.0.0
+    COMPATIBILITY SameMajorVersion
+)
+
+# 配置包配置文件
+configure_package_config_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}Config.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+    INSTALL_DESTINATION lib/cmake/${PROJECT_NAME}
+)
+
+# 安装包配置文件
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+    DESTINATION lib/cmake/${PROJECT_NAME}
+)
+
+# 安装导出目标
+install(EXPORT ${PROJECT_NAME}
+    FILE ${PROJECT_NAME}Targets.cmake
+    NAMESPACE ${PROJECT_NAME}::
+    DESTINATION lib/cmake/${PROJECT_NAME}
 )
