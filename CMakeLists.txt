@@ -15,3 +15,8 @@ install(TARGETS color_printer
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
 )
+
+install(DIRECTORY include/
+    DESTINATION include
+    FILES_MATCHING PATTERN "*.h"
+)
