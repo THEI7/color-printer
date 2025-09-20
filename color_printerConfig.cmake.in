@@ -1,0 +1,12 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# 查找依赖项（如果有的话）
+# find_dependency(...)
+
+# 包含导出的目标
+include("${CMAKE_CURRENT_LIST_DIR}/color_printerTargets.cmake")
+
+# 检查目标是否可用
+check_required_components(color_printer)
