@@ -230,6 +230,27 @@ sudo make install
 - `/usr/local/include/color_printer.h` - 头文件
 - `/usr/local/lib/cmake/color_printer/` - CMake配置文件（用于find_package）
 
+### 卸载方法
+
+#### 如果执行了 `sudo make install` 后需要删除库
+
+```bash
+# 1. 删除动态库文件
+sudo rm -f /usr/local/lib/libcolor_printer.so
+
+# 2. 删除头文件
+sudo rm -f /usr/local/include/color_printer.h
+
+# 3. 删除CMake配置文件目录
+sudo rm -rf /usr/local/lib/cmake/color_printer/
+
+# 4. 更新动态链接器缓存
+sudo ldconfig
+
+# 5. 验证卸载是否成功
+ls /usr/local/lib/libcolor_printer.so /usr/local/include/color_printer.h 2>/dev/null && echo "卸载失败，文件仍存在" || echo "库已成功卸载"
+```
+
 #### 卸载说明
 
 如果需要卸载已安装的库，可以使用以下命令：
