@@ -36,7 +36,17 @@ make
 
 # 安装（可选）
 sudo make install
+
+# 更新系统的动态链接库缓存
+sudo ldconfig
 ```
+
+## 验证是否安装成功
+```
+sudo ldconfig &&  /usr/local/bin/color_printer_test
+```
+
+
 
 ## 使用方法
 

@@ -9,6 +9,19 @@ add_library(color_printer SHARED
     src/color_printer.cpp
 )
 
+
+# 添加测试用的程序
+add_executable(color_printer_test src/colorPinterTest.cpp)
+
+target_link_libraries(color_printer_test PUBLIC color_printer)
+
+target_include_directories(color_printer_test PUBLIC include/)
+
+# 安装测试程序
+install(TARGETS color_printer_test
+        RUNTIME DESTINATION bin
+)
+
 # 安装库
 install(TARGETS color_printer
     EXPORT ${PROJECT_NAME}
@@ -22,6 +35,8 @@ install(DIRECTORY include/
     DESTINATION include
     FILES_MATCHING PATTERN "*.h"
 )
+
+message(STATUS "CMAKE_INSTALL_PREFIX--${CMAKE_INSTALL_PREFIX}")
 
 # 生成包配置文件
 include(CMakePackageConfigHelpers)
